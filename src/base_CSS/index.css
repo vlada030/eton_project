@@ -1,0 +1,9 @@
+:root {
+    --max-width: 1298px;
+}
+
+body {
+    font-family: "Proxima Nova", "Calibri", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
