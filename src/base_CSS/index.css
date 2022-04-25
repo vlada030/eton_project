@@ -1,9 +1,41 @@
 :root {
-    --max-width: 1298px;
+    --color-blue-200: #81C4EC;
+    --color-blue-500: #25047E;
+    --color-blue-650: #28057F;
+    --color-blue-600: #29057E;
+    --color-blue-700: #2A067E;
+
+
+    --color-pink-300: #C23390;
+    --color-pink-600: #a12175;
+
+    --color-white-300: #F2F2F2;
+    --color-white-100: #FFFFFF;
+
+    --color-gray-300: #979797;
+    --color-gray-700: #3C3C3C;
+
+    --border-radius-10: 10px;
+    --border-radius-5: 5px;
+    --border-radius-4: 4px;
+
+    --border-bottom: 1px solid rgb(151, 151, 151, 0.3);
+    --max-width: 1297px;
+    --transition: all 0.2s;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: "Proxima Nova", "Calibri", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+    background-color: var(--color-white-300);
+    overflow: hidden;
+    }
