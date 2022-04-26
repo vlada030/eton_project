@@ -13,6 +13,8 @@ import NavigationLink from "./NavigationLink"
 import ShimmerItem from './ShimmerItem'
 import ProductItem from './ProductItem'
 import ContentWrapper from './ContentWrapper'
+import CartList from './CartList'
+import CartItem from './CartItem'
 
 export {
     Navigation,
@@ -29,5 +31,7 @@ export {
     NavigationLink,
     ShimmerItem,
     ProductItem,
-    ContentWrapper
+    ContentWrapper,
+    CartList,
+    CartItem
 };

@@ -1,26 +1,40 @@
 import styled from "styled-components"
 import {useGlobalContext} from '../context/global_context'
 import {MenuItem} from '.' 
+import { useLocation } from "react-router-dom";
+
 
 function Sidebar() {
 
     const {isSidebarOpen, activeMenuItem} = useGlobalContext()
 
+    let location = useLocation();
+    const isCartPageLoaded = location.pathname === "/cart";
+
     return (
-        <Wrapper className={isSidebarOpen ? 'open' : ''}>
+        <Wrapper className={isSidebarOpen ? "open" : ""}>
             <ul className="menu-list">
-                <li className={activeMenuItem ==='Home' ? 'menu-item active' : "menu-item"}>
-                    <MenuItem caption='Home' />
+                <li
+                    className={
+                        activeMenuItem === "Home" && !isCartPageLoaded
+                            ? "menu-item active"
+                            : "menu-item"
+                    }
+                >
+                    <MenuItem caption="Home" />
                 </li>
-                <li className={activeMenuItem ==='Shop' ? 'menu-item active' : "menu-item"}>
-                    <MenuItem caption='Shop' />
-                </li>
-                <li className={activeMenuItem ==='Contact' ? 'menu-item active' : "menu-item"}>
-                    <MenuItem caption='Contact' />
+                <li
+                    className={
+                        activeMenuItem === "Shop" && !isCartPageLoaded
+                            ? "menu-item active"
+                            : "menu-item"
+                    }
+                >
+                    <MenuItem caption="Shop" />
                 </li>
             </ul>
         </Wrapper>
-    )
+    );
 }
 
 const Wrapper = styled.div`

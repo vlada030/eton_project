@@ -1,22 +1,23 @@
-import styled from "styled-components"
-import { CartPreviewItem } from "."
+import styled from "styled-components";
+import { CartPreviewItem } from ".";
+import { useProductsContext } from "../context/products_context";
 
 function CartPreviewList() {
+    const { cart } = useProductsContext();
+
     return (
         <Wrapper>
-            <li>
-                <CartPreviewItem link="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" name="Shop Item 1"/>
-            </li>
-            <li>
-                <CartPreviewItem link="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" name="Shop Item 1"/>
-            </li>
-            <li>
-                <CartPreviewItem link="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" name="Shop Item 1"/>
-            </li>
-            <li>
-                <CartPreviewItem link="https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=1080&fit=max" name="Shop Item 1"/>
-            </li>
-            
+            {cart.map((item) => {
+                return (
+                    <li key={item.id}>
+                        <CartPreviewItem
+                            link={item.image}
+                            name={item.title}
+                            count={item.count}
+                        />
+                    </li>
+                );
+            })}
         </Wrapper>
     );
 }
@@ -24,17 +25,40 @@ function CartPreviewList() {
 const Wrapper = styled.ul`
     list-style: none;
     max-height: 185px;
-    overflow-y: scroll;
+    overflow-y: auto;
+
+    // scrollbar-width: thin;
+    // scrollbar-gutter: stable;
+
+    // &::-webkit-scrollbar {
+    //     scrollbar-width: none;
+    // }
+
+    /* Works on Firefox */
+
     scrollbar-width: thin;
+    scrollbar-color: var(--color-blue-500);
+
+    /* Works on Chrome, Edge, and Safari */
     &::-webkit-scrollbar {
-        scrollbar-width: thin;
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-blue-500);
+        border-radius: 20px;
+        border: 3px solid transparent;
     }
 
     li {
         width: 60vw;
         height: 50px;
         margin: 0 auto;
-        margin-bottom: 18px;
+        margin-bottom: 17px;
         border-bottom: var(--border-bottom);
     }
 
@@ -50,4 +74,4 @@ const Wrapper = styled.ul`
     }
 `;
 
-export default CartPreviewList
+export default CartPreviewList;

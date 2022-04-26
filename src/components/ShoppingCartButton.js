@@ -2,11 +2,18 @@ import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
 
 import {useGlobalContext} from '../context/global_context'
+import {useProductsContext} from '../context/products_context'
 
-function ShoppingCartButton({count}) {
+function ShoppingCartButton() {
 
     const {handleCartPreview} = useGlobalContext()
+    const {cart} = useProductsContext()
 
+    const count = cart.reduce((total, item) => {
+        total += item.count;
+        return total;
+    }, 0)
+    
     return (
         <Wrapper onClick={() => handleCartPreview()}>
             <FaShoppingCart className="cart-icon" />

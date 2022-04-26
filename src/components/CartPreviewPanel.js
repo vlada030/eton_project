@@ -1,18 +1,40 @@
-import styled from "styled-components"
-import {useGlobalContext} from '../context/global_context'
-import {CartPreviewList, Button} from '.'
-
-
+import styled from "styled-components";
+import { useGlobalContext } from "../context/global_context";
+import { useProductsContext } from "../context/products_context";
+import { CartPreviewList, Button } from ".";
+import { Fragment } from "react";
+import {useNavigate} from 'react-router-dom'
 
 function CartPreviewPanel() {
+    const { isCartOpen, handleCartPreview, handleActiveMenuItem } = useGlobalContext();
+    const { cart } = useProductsContext();
+    let navigate = useNavigate()
 
-    const {isCartOpen} = useGlobalContext()
+    const openCartList = () => {
+        handleCartPreview();
+        handleActiveMenuItem('')         
+        navigate('cart');
+    }
 
     return (
         <Wrapper className={isCartOpen ? "" : "hide"}>
-            <CartPreviewList />
+            {cart.length !== 0 && (
+                <Fragment>
+                    <CartPreviewList />
 
-            <Button caption="Go to Checkout" color="var(--color-blue-600)" />
+                    <Button
+                        caption="Go to Checkout"
+                        color="var(--color-blue-600)"
+                        handleClick={() => openCartList()}
+                    />
+                </Fragment>
+            )}
+
+            {cart.length === 0 && (
+                <div className="empty">
+                    <p>Your Cart is Empty</p>
+                </div>
+            )}
         </Wrapper>
     );
 }
@@ -21,7 +43,7 @@ const Wrapper = styled.div`
     position: absolute;
     top: 42px;
     right: -70px;
-    
+
     width: calc(90vw);
     // height: 246px;
     // width: 256px;
@@ -51,8 +73,26 @@ const Wrapper = styled.div`
         // pointer-events: none;
     }
 
+    .empty {
+        width: 60vw;
+        height: 50px;
+        margin: 0 auto;
+        margin-bottom: 17px;
+        border-bottom: var(--border-bottom);
+    }
+
+    .empty {
+        display: grid;
+        place-content: center;
+        font-size: 20px;
+    }
+
     @media screen and (min-width: 640px) {
         width: auto;
+
+        .empty {
+            width: 214px;
+        }
     }
 
     @media screen and (min-width: 768px) {

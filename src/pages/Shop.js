@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
 import { ContentWrapper, ShimmerItem, ProductItem } from "../components/.";
+import { ErrorPage } from "../pages/.";
 
 function ShimmerList() {
     return [1, 2, 3, 4, 5, 6].map((item) => {
@@ -9,9 +10,10 @@ function ShimmerList() {
 }
 
 function Shop() {
-    const { products, areProductsLoaded } = useProductsContext();
+    const { products, areProductsLoaded, doesErrorExist, errorMessage } =
+        useProductsContext();
 
-    if (!areProductsLoaded) {
+    if (!areProductsLoaded && !doesErrorExist) {
         return (
             <ContentWrapper>
                 <Wrapper>
@@ -21,6 +23,10 @@ function Shop() {
         );
     }
 
+    if (doesErrorExist) {
+        return <ErrorPage message={errorMessage} />;
+    }
+
     return (
         <ContentWrapper>
             <Wrapper>
@@ -28,6 +34,7 @@ function Shop() {
                     return (
                         <ProductItem
                             key={id}
+                            id={id}
                             image={image}
                             title={title}
                             price={price}

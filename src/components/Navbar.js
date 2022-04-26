@@ -2,9 +2,14 @@ import styled from "styled-components";
 
 import { Logo, MenuItem, ShoppingCartButton, SideNavButton , CartPreviewPanel } from ".";
 import { useGlobalContext } from "../context/global_context";
+import { useLocation } from "react-router-dom";
+
 
 function Navbar() {
 
+    let location = useLocation();
+    const isCartPageLoaded = location.pathname === '/cart'
+    
     const {activeMenuItem} = useGlobalContext()
 
     return (
@@ -16,7 +21,7 @@ function Navbar() {
 
                 <li
                     className={
-                        activeMenuItem === "Home"
+                        activeMenuItem === "Home" && !isCartPageLoaded
                             ? "menu-item active"
                             : "menu-item"
                     }
@@ -26,7 +31,7 @@ function Navbar() {
 
                 <li
                     className={
-                        activeMenuItem === "Shop"
+                        activeMenuItem === "Shop" && !isCartPageLoaded
                             ? "menu-item active"
                             : "menu-item"
                     }
@@ -34,8 +39,8 @@ function Navbar() {
                     <MenuItem caption="Shop" />
                 </li>
 
-                <li className="cart">
-                    <ShoppingCartButton count="3" />
+                <li className={isCartPageLoaded ? "cart hidden" : "cart"}>
+                    <ShoppingCartButton />
                     <CartPreviewPanel />
                 </li>
 
@@ -74,6 +79,10 @@ const Wrapper = styled.nav`
     .cart {
         position: relative;
         margin-right: calc(5vw + 7px);
+    }
+
+    .cart.hidden {
+        visibility: hidden;
     }
 
     @media screen and (min-width: 768px) {

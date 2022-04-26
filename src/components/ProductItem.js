@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import {Button} from '.'
+import { useProductsContext } from "../context/products_context";
+import {formatPrice} from '../utils/handleItemPrice'
 
-function ProductItem({ image, title, price, description }) {
+function ProductItem(item) {
+    const { image, title, price, description } = item;
+    const {addItemToCart} = useProductsContext();
+
     return <Card>
         <div className="card-header">
             <img src={image} alt={title} className="card-image"/>
@@ -10,11 +15,11 @@ function ProductItem({ image, title, price, description }) {
             <div>
                 <div className="card-title">
                     <h3>{title}</h3>
-                    <h3 className="card-price">{price}$</h3>
+                    <h3 className="card-price">{formatPrice(price)}$</h3>
                 </div>
                 <div className="card-description">{description}</div>
             </div>
-            <Button caption="Add to Cart" color="var(--color-pink-300)"/>
+            <Button caption="Add to Cart" color="var(--color-pink-300)" handleClick={() => addItemToCart(item)}/>
         </div>
     </Card>;
 }

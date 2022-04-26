@@ -11,9 +11,21 @@ const Wrapper = styled.div`
     height: calc(100vh - 82px);
     overflow-y: auto;
     scrollbar-width: thin;
+    scrollbar-color: var(--color-blue-500);
 
+    /* Works on Chrome, Edge, and Safari */
     &::-webkit-scrollbar {
-        scrollbar-width: thin;
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-blue-500);
+        border-radius: 20px;
+        border: 3px solid transparent;
     }
 
     .wrapper {
