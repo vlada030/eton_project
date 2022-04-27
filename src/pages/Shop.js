@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
-import { ContentWrapper, ShimmerItem, ProductItem } from "../components/.";
+import { useFilterContext } from "../context/filter_context";
+import {
+    ContentWrapper,
+    ShimmerItem,
+    ProductItem,
+    FilterItemsForm,
+} from "../components/.";
 import { ErrorPage } from "../pages/.";
 
 function ShimmerList() {
@@ -10,12 +16,14 @@ function ShimmerList() {
 }
 
 function Shop() {
-    const { products, areProductsLoaded, doesErrorExist, errorMessage } =
+    const { areProductsLoaded, doesErrorExist, errorMessage } =
         useProductsContext();
+    const { noSearchResults, filteredProducts } = useFilterContext();
 
     if (!areProductsLoaded && !doesErrorExist) {
         return (
             <ContentWrapper>
+                <FilterItemsForm />
                 <Wrapper>
                     <ShimmerList />
                 </Wrapper>
@@ -29,20 +37,31 @@ function Shop() {
 
     return (
         <ContentWrapper>
+            <FilterItemsForm />
+
+            {noSearchResults  && (
+                <h2 style={{ textAlign: "center" }}>
+                    Sorry, your search criteria didn't give any results...
+                </h2>
+            )}
+
             <Wrapper>
-                {products.map(({ id, image, title, price, description }) => {
-                    return (
-                        <ProductItem
-                            key={id}
-                            id={id}
-                            image={image}
-                            title={title}
-                            price={price}
-                            description={description}
-                        />
-                    );
-                })}
+                {filteredProducts.map(
+                    ({ id, image, title, price, description }) => {
+                        return (
+                            <ProductItem
+                                key={id}
+                                id={id}
+                                image={image}
+                                title={title}
+                                price={price}
+                                description={description}
+                            />
+                        );
+                    }
+                )}
             </Wrapper>
+
         </ContentWrapper>
     );
 }

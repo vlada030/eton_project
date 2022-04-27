@@ -1,12 +1,27 @@
 import styled from "styled-components";
-import {NavigationLink} from '../components/.'
+import {Button} from '../components/.'
+import {useNavigate} from 'react-router-dom'
+import {useGlobalContext} from '../context/global_context' 
 
 function NotFound() {
+    const {handleActiveMenuItem} = useGlobalContext()
+    const navigate = useNavigate();
+    const handleButtonClick = () => {
+        handleActiveMenuItem("Shop");
+        navigate("shop");
+    };
+
     return (
         <Wrapper>
             <h2>Sorry 🙄🤷‍♀️</h2>
             <h2>404 Page Not Found ...</h2>
-            <NavigationLink url='shop' caption="Back to Shop" />
+            <div className="container">
+                <Button
+                    caption="Back to Shop"
+                    color="var(--color-pink-300)"
+                    handleClick={() => handleButtonClick()}
+                />
+            </div>
         </Wrapper>
     );
 }
@@ -23,6 +38,10 @@ const Wrapper = styled.div`
         margin-bottom: 50px;
     }
 
+    .container {
+        width: 130px;
+        margin: 0 auto;
+    }
 `;
 
 export default NotFound;

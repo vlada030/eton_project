@@ -7,7 +7,7 @@ import {
     Navigate,
 } from "react-router-dom";
 import { Shop, Cart, PageNotFound } from "./pages";
-import { Navigation } from "./components";
+import { Navigation, ScrollToTopButton } from "./components";
 
 function App() {
     return (
@@ -19,6 +19,7 @@ function App() {
                         <Fragment>
                             <Navigation />
                             <Outlet />
+                            <ScrollToTopButton />
                         </Fragment>
                     }
                 >

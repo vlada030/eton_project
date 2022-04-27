@@ -65,7 +65,6 @@ const productsReducer = (state, action) => {
         case "REMOVE_ITEM_FROM_CART": {
             const {id, count} = action.payload;
 
-            console.log({id, count});
             if (count > 1) {
                 let updatedCart = state.cart.map( item => {
                     if (item.id === id) {
@@ -89,6 +88,7 @@ const productsReducer = (state, action) => {
         }
 
         case "DELETE_ALL_CART_ITEMS": {
+            saveToLocalStorage("cart", JSON.stringify([]));
             return {...state, cart: []}
         }
 

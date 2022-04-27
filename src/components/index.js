@@ -15,6 +15,9 @@ import ProductItem from './ProductItem'
 import ContentWrapper from './ContentWrapper'
 import CartList from './CartList'
 import CartItem from './CartItem'
+import FilterItemsForm from './FilterItemsForm'
+import SortButton from './SortButton'
+import ScrollToTopButton from './ScrollToTopButton'
 
 export {
     Navigation,
@@ -33,5 +36,8 @@ export {
     ProductItem,
     ContentWrapper,
     CartList,
-    CartItem
+    CartItem,
+    FilterItemsForm,
+    SortButton,
+    ScrollToTopButton
 };
