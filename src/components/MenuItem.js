@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import { useDispatch} from "react-redux";
 import {useNavigate} from 'react-router-dom'
+import { globalActions } from "../store/global_slice";
 
 function MenuItem({ caption }) {
 
     const dispatch = useDispatch()
+    
     const handleActiveMenuItem = (item) => {
-        dispatch({ type: "SIDEBAR_TOGGLE", payload: item });
+        dispatch(globalActions.handleActiveMenuItem(item));
     };
 
     const handleSidebarVisibility = () => {
-        dispatch({ type: "SIDEBAR_TOGGLE" });
+        dispatch(globalActions.handleSidebarVisibility());
     };
 
     let navigate = useNavigate()

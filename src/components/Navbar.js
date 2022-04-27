@@ -9,7 +9,7 @@ function Navbar() {
     let location = useLocation();
     const isCartPageLoaded = location.pathname === '/cart'
 
-    const activeMenuItem = useSelector(state => state.activeMenuItem)    
+    const activeMenuItem = useSelector(state => state.global.activeMenuItem)    
 
     return (
         <Wrapper>

@@ -3,13 +3,14 @@ import { FaShoppingCart } from "react-icons/fa";
 
 import { useDispatch } from "react-redux";
 import {useProductsContext} from '../context/products_context'
+import { globalActions } from "../store/global_slice";
 
 function ShoppingCartButton() {
 
     const dispatch = useDispatch()
 
     const handleCartPreview = () => {
-        dispatch({ type: "CART_PREVIEW_TOGGLE" });
+        dispatch(globalActions.handleCartPreview());
     };
     
     const {cart} = useProductsContext()

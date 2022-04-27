@@ -6,9 +6,8 @@ import { useLocation } from "react-router-dom";
 
 function Sidebar() {
 
-
-    const isSidebarOpen = useSelector(state => state.isSidebarOpen)
-    const activeMenuItem = useSelector(state => state.activeMenuItem)
+    const isSidebarOpen = useSelector(state => state.global.isSidebarOpen)
+    const activeMenuItem = useSelector(state => state.global.activeMenuItem)
 
     let location = useLocation();
     const isCartPageLoaded = location.pathname === "/cart";

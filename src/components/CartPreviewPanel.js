@@ -4,14 +4,15 @@ import { useProductsContext } from "../context/products_context";
 import { CartPreviewList, Button } from ".";
 import { Fragment } from "react";
 import {useNavigate} from 'react-router-dom'
+import { globalActions } from "../store/global_slice";
 
 function CartPreviewPanel() {
     const dispatch = useDispatch()
-    const isCartOpen = useSelector(state => state.isCartOpen)
+    const isCartOpen = useSelector(state => state.global.isCartOpen)
     
-    const handleCartPreview = () => {dispatch({type: "CART_PREVIEW_TOGGLE"})}
+    const handleCartPreview = () => {dispatch(globalActions.handleCartPreview())}
 
-    const handleActiveMenuItem = item => {dispatch({ type: "SIDEBAR_TOGGLE", payload: item});}
+    const handleActiveMenuItem = item => {dispatch(globalActions.handleActiveMenuItem(item));}
 
     const { cart } = useProductsContext();
     let navigate = useNavigate()
