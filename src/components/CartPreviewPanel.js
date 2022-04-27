@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useProductsContext } from "../context/products_context";
 import { CartPreviewList, Button } from ".";
 import { Fragment } from "react";
 import {useNavigate} from 'react-router-dom'
@@ -14,7 +13,8 @@ function CartPreviewPanel() {
 
     const handleActiveMenuItem = item => {dispatch(globalActions.handleActiveMenuItem(item));}
 
-    const { cart } = useProductsContext();
+    const cart = useSelector((state) => state.cart.cart);
+    
     let navigate = useNavigate()
 
     const openCartList = () => {

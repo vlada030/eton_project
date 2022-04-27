@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useProductsContext } from "../context/products_context";
-import { useFilterContext } from "../context/filter_context";
 import {
     ContentWrapper,
     ShimmerItem,
@@ -8,6 +6,7 @@ import {
     FilterItemsForm,
 } from "../components/.";
 import { ErrorPage } from "../pages/.";
+import { useSelector } from "react-redux";
 
 function ShimmerList() {
     return [1, 2, 3, 4, 5, 6].map((item) => {
@@ -16,9 +15,19 @@ function ShimmerList() {
 }
 
 function Shop() {
-    const { areProductsLoaded, doesErrorExist, errorMessage } =
-        useProductsContext();
-    const { noSearchResults, filteredProducts } = useFilterContext();
+    const noSearchResults = useSelector(
+        (state) => state.products.noSearchResults
+    );
+    const filteredProducts = useSelector(
+        (state) => state.products.filteredProducts
+    );
+    const areProductsLoaded = useSelector(
+        (state) => state.products.areProductsLoaded
+    );
+    const doesErrorExist = useSelector(
+        (state) => state.products.doesErrorExist
+    );
+    const errorMessage = useSelector((state) => state.products.errorMessage);
 
     if (!areProductsLoaded && !doesErrorExist) {
         return (
@@ -39,7 +48,7 @@ function Shop() {
         <ContentWrapper>
             <FilterItemsForm />
 
-            {noSearchResults  && (
+            {noSearchResults && (
                 <h2 style={{ textAlign: "center" }}>
                     Sorry, your search criteria didn't give any results...
                 </h2>
@@ -61,7 +70,6 @@ function Shop() {
                     }
                 )}
             </Wrapper>
-
         </ContentWrapper>
     );
 }

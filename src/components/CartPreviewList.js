@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { CartPreviewItem } from ".";
-import { useProductsContext } from "../context/products_context";
+
+import {useSelector } from "react-redux";
 
 function CartPreviewList() {
-    const { cart } = useProductsContext();
+    const cart = useSelector(state => state.cart.cart)
 
     return (
         <Wrapper>

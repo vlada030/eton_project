@@ -13,7 +13,6 @@ function ErrorPage({ message }) {
         <Wrapper>
             <h2>Error ... 🙄🤷‍♀️</h2>
             <h2>{message}</h2>
-            {/* <NavigationLink url="../shop" caption="Reload" /> */}
             <Button
                 caption="Reload"
                 color="var(--color-pink-300)"

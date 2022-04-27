@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import { useFilterContext } from "../context/filter_context";
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useRef } from "react";
 import { SortButton } from ".";
+import {debounce} from '../utils/debounce'
+import {useDispatch} from 'react-redux'
+import { productsActions } from "../store/products_slice";
+
 
 function FilterItemsForm() {
-    const { debouncedHandleSearchInput } = useFilterContext();
+    const dispatch = useDispatch()
+
+    const handleSearchInput = (term) => {
+        dispatch(productsActions.handleSearchInput(term))
+    }
     const searchField = useRef();
 
     useEffect(() => {
@@ -13,7 +20,7 @@ function FilterItemsForm() {
     }, [])
 
     const handleUserInput = (e) => {
-        debouncedHandleSearchInput(e.target.value);
+        debounce(handleSearchInput(e.target.value));
     };
     return (
         <Wrapper>

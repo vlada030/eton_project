@@ -1,11 +1,15 @@
 import styled from 'styled-components'
-import {useFilterContext} from '../context/filter_context'
 import {BsSortUpAlt, BsSortUp} from 'react-icons/bs'
+import { useDispatch, useSelector } from "react-redux";
+import { productsActions } from "../store/products_slice";
 
 function SortButton() {
-
-    const {ascendingSort, handleSortingOrder} = useFilterContext()
-
+    const ascendingSort = useSelector(state => state.products.ascendingSort)
+    const dispatch = useDispatch()
+    const handleSortingOrder = () => {
+        dispatch(productsActions.handleSortingOrder())
+    }
+    
     return (
         <Wrapper onClick={() => handleSortingOrder()}>
             {ascendingSort ? <BsSortUpAlt /> : <BsSortUp />}

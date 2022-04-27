@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { formatPrice } from "../utils/handleItemPrice";
-import {useProductsContext} from '../context/products_context'
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/cart_slice";
 
 function CartItem({ item }) {
-    
-    const {handleRemoveItemFromCart} = useProductsContext()
+    const dispatch = useDispatch();
+    const handleRemoveItemFromCart = (data) => {
+        dispatch(cartActions.handleRemoveItemFromCart(data));
+    };
 
     const { id, image, price, title, description, count } = item;
 
@@ -29,7 +32,7 @@ function CartItem({ item }) {
                     <p className="price">{formatPrice(price)}$</p>
                     <button
                         className="btn"
-                        onClick={() => handleRemoveItemFromCart(id, count)}
+                        onClick={() => handleRemoveItemFromCart({ id, count })}
                     >
                         Remove
                     </button>

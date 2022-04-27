@@ -1,11 +1,15 @@
 import styled from "styled-components";
+import {useDispatch} from 'react-redux'
 import {Button} from '.'
-import { useProductsContext } from "../context/products_context";
 import {formatPrice} from '../utils/handleItemPrice'
+import { cartActions } from "../store/cart_slice";
 
 function ProductItem(item) {
     const { image, title, price, description } = item;
-    const {addItemToCart} = useProductsContext();
+    const dispatch = useDispatch()
+    const addItemToCart = () => {
+        dispatch(cartActions.addItemToCart(item))
+    }
 
     return <Card>
         <div className="card-header">

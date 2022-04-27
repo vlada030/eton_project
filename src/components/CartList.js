@@ -1,12 +1,17 @@
 import styled from 'styled-components'
-import {useProductsContext} from '../context/products_context'
 import {CartItem, Button} from '.'
 import {formatPrice, sumTotalCartPrice} from '../utils/handleItemPrice'
 import {useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+import { cartActions } from '../store/cart_slice'
 
 function CartList() {
-
-    const {cart, handleDeleteCart} = useProductsContext()
+    const cart = useSelector(state => state.cart.cart)
+    
+    const dispatch = useDispatch()
+    const handleDeleteCart = () => {
+        dispatch(cartActions.handleDeleteCart())
+    }
     let navigate = useNavigate()
 
     const totalPrice = sumTotalCartPrice(cart)

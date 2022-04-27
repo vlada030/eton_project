@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
 
-import { useDispatch } from "react-redux";
-import {useProductsContext} from '../context/products_context'
+import { useDispatch, useSelector } from "react-redux";
 import { globalActions } from "../store/global_slice";
 
 function ShoppingCartButton() {
@@ -13,7 +12,7 @@ function ShoppingCartButton() {
         dispatch(globalActions.handleCartPreview());
     };
     
-    const {cart} = useProductsContext()
+    const cart = useSelector((state) => state.cart.cart);
 
     const count = cart.reduce((total, item) => {
         total += item.count;

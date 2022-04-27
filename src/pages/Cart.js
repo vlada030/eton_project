@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useProductsContext } from "../context/products_context";
+import { useSelector } from "react-redux";
 import { CartList } from "../components/.";
 
 function Cart() {
-    const { cart } = useProductsContext();
+    const cart = useSelector((state) => state.cart.cart);
 
     return (
         <Wrapper>
