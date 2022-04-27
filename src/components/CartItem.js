@@ -90,6 +90,7 @@ const Wrapper = styled.article`
 
     .quantity-text {
         font-size: 16px;
+        font-weight: 400;
         color: var(--color-gray-700);
         line-height: 19px;
         margin-bottom: 15px;

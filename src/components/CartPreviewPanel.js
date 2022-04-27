@@ -58,6 +58,8 @@ const Wrapper = styled.div`
 
     padding: 18px 16px 16px 16px;
 
+    z-index: 200;
+
     &:after {
         content: "";
         border: 8px solid transparent;

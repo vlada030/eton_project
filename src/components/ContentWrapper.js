@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import {ScrollToTopButton} from '../components'
+
 function ContentWrapper({ children }) {
+
+    useEffect(() => {
+
+    }, [])
     return (
-        <Wrapper>
+        <Wrapper id="scroll-element">
             <div className="wrapper">{children}</div>
+            <ScrollToTopButton />
         </Wrapper>
     );
 }
