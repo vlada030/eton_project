@@ -1,16 +1,15 @@
 import styled from "styled-components";
-
 import { Logo, MenuItem, ShoppingCartButton, SideNavButton , CartPreviewPanel } from ".";
-import { useGlobalContext } from "../context/global_context";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 function Navbar() {
 
     let location = useLocation();
     const isCartPageLoaded = location.pathname === '/cart'
-    
-    const {activeMenuItem} = useGlobalContext()
+
+    const activeMenuItem = useSelector(state => state.activeMenuItem)    
 
     return (
         <Wrapper>

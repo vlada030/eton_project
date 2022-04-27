@@ -1,9 +1,14 @@
 import styled from "styled-components";
-import {useGlobalContext} from '../context/global_context'
+import {useSelector, useDispatch} from 'react-redux'
 
 function SideNavButton() {
 
-    const {isSidebarOpen, handleSidebarVisibility} = useGlobalContext()
+    const isSidebarOpen = useSelector(state => state.isSidebarOpen)
+
+    const dispatch = useDispatch()
+    const handleSidebarVisibility = () => {
+        dispatch({ type: "SIDEBAR_TOGGLE" });
+    };
 
     return (
         <Wrapper>

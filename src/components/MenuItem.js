@@ -1,9 +1,18 @@
 import styled from "styled-components";
-import { useGlobalContext } from "../context/global_context";
+import { useDispatch} from "react-redux";
 import {useNavigate} from 'react-router-dom'
 
 function MenuItem({ caption }) {
-    const { handleActiveMenuItem, handleSidebarVisibility } = useGlobalContext();
+
+    const dispatch = useDispatch()
+    const handleActiveMenuItem = (item) => {
+        dispatch({ type: "SIDEBAR_TOGGLE", payload: item });
+    };
+
+    const handleSidebarVisibility = () => {
+        dispatch({ type: "SIDEBAR_TOGGLE" });
+    };
+
     let navigate = useNavigate()
 
     const handleButtonClick = () => {

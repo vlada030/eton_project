@@ -1,12 +1,18 @@
 import styled from "styled-components";
-import { useGlobalContext } from "../context/global_context";
+import { useDispatch, useSelector } from "react-redux";
 import { useProductsContext } from "../context/products_context";
 import { CartPreviewList, Button } from ".";
 import { Fragment } from "react";
 import {useNavigate} from 'react-router-dom'
 
 function CartPreviewPanel() {
-    const { isCartOpen, handleCartPreview, handleActiveMenuItem } = useGlobalContext();
+    const dispatch = useDispatch()
+    const isCartOpen = useSelector(state => state.isCartOpen)
+    
+    const handleCartPreview = () => {dispatch({type: "CART_PREVIEW_TOGGLE"})}
+
+    const handleActiveMenuItem = item => {dispatch({ type: "SIDEBAR_TOGGLE", payload: item});}
+
     const { cart } = useProductsContext();
     let navigate = useNavigate()
 

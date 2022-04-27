@@ -1,12 +1,14 @@
 import styled from "styled-components"
-import {useGlobalContext} from '../context/global_context'
+import {useSelector} from 'react-redux'
 import {MenuItem} from '.' 
 import { useLocation } from "react-router-dom";
 
 
 function Sidebar() {
 
-    const {isSidebarOpen, activeMenuItem} = useGlobalContext()
+
+    const isSidebarOpen = useSelector(state => state.isSidebarOpen)
+    const activeMenuItem = useSelector(state => state.activeMenuItem)
 
     let location = useLocation();
     const isCartPageLoaded = location.pathname === "/cart";

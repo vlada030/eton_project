@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { FaShoppingCart } from "react-icons/fa";
 
-import {useGlobalContext} from '../context/global_context'
+import { useDispatch } from "react-redux";
 import {useProductsContext} from '../context/products_context'
 
 function ShoppingCartButton() {
 
-    const {handleCartPreview} = useGlobalContext()
+    const dispatch = useDispatch()
+
+    const handleCartPreview = () => {
+        dispatch({ type: "CART_PREVIEW_TOGGLE" });
+    };
+    
     const {cart} = useProductsContext()
 
     const count = cart.reduce((total, item) => {
