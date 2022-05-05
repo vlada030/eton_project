@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import {
     BrowserRouter as Router,
     Routes,
@@ -11,29 +10,16 @@ import {
 import { Shop, Cart, PageNotFound } from "./pages";
 import { Navigation, ScrollToTopButton } from "./components";
 import { useDispatch } from "react-redux";
-import { productsActions } from "./store/products_slice";
+import {getProductItems} from './store/products_slice'
 
-const URL =
-    "https://my-json-server.typicode.com/brankostancevic/products/products";
 
-function App() {
-    const dispatch = useDispatch();
+function App() {   
 
-    const fetchData = async () => {
-        dispatch(productsActions.handleStartFetchingData());
-
-        try {
-            const { data } = await axios(URL);
-
-            dispatch(productsActions.handleSuccessfullyFetchedAllData(data));
-        } catch (error) {
-            dispatch(productsActions.handleCatchError(error.message));
-            console.error(error);
-        }
-    };
-
+    const dispatch = useDispatch()
+    
     useEffect(() => {
-        fetchData();
+        dispatch(getProductItems());
+        // eslint-disable-next-line
     }, []);
 
     return (

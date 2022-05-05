@@ -1,7 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const URL =
+    "https://my-json-server.typicode.com/brankostancevic/products/products";
+
+export const getProductItems = createAsyncThunk(
+    "products/getProductItems",
+    async (_, thunkAPI) => {
+        try {
+            const { data } = await axios(URL);
+            return data
+        } catch (error) {
+            //console.error(error);
+            return thunkAPI.rejectWithValue(`Error log: ${error.message}`)
+        }
+    }
+);
 
 const productsSlice = createSlice({
-    name: "cart",
+    name: "products",
     initialState: {
         areProductsLoaded: false,
         products: [],
@@ -14,25 +31,6 @@ const productsSlice = createSlice({
     },
 
     reducers: {
-        handleStartFetchingData(state) {
-            state.areProductsLoaded = false;
-            state.doesErrorExist = false;
-            state.errorMessage = "";
-        },
-
-        handleSuccessfullyFetchedAllData(state, action) {
-            state.products = action.payload;
-            state.filteredProducts = action.payload;
-            state.areProductsLoaded = true;
-            state.doesErrorExist = false;
-            state.errorMessage = "";
-        },
-
-        handleCatchError(state, action) {
-            state.areProductsLoaded = false;
-            state.doesErrorExist = true;
-            state.errorMessage = action.payload;
-        },
 
         handleSearchInput(state, action) {
             const term = action.payload;
@@ -73,10 +71,29 @@ const productsSlice = createSlice({
             }
 
             state.ascendingSort = !state.ascendingSort;
-            state.filteredProducts = tempProducts
-
-        }
+            state.filteredProducts = tempProducts;
+        },
     },
+
+    extraReducers: {
+        [getProductItems.pending]: (state) => {
+            state.areProductsLoaded = false;
+            state.doesErrorExist = false;
+            state.errorMessage = "";
+        },
+        [getProductItems.fulfilled]: (state, action) => {
+            state.products = action.payload;
+            state.filteredProducts = action.payload;
+            state.areProductsLoaded = true;
+            state.doesErrorExist = false;
+            state.errorMessage = "";
+        },
+        [getProductItems.rejected]: (state, action) => {
+            state.areProductsLoaded = false;
+            state.doesErrorExist = true;
+            state.errorMessage = action.payload;
+        },
+    }
 });
 
 export const productsActions = productsSlice.actions;

@@ -13,11 +13,13 @@ function ErrorPage({ message }) {
         <Wrapper>
             <h2>Error ... 🙄🤷‍♀️</h2>
             <h2>{message}</h2>
-            <Button
-                caption="Reload"
-                color="var(--color-pink-300)"
-                handleClick={() => handleReloadButton()}
-            />
+            <div className="container">
+                <Button
+                    caption="Reload"
+                    color="var(--color-pink-300)"
+                    handleClick={() => handleReloadButton()}
+                />
+            </div>
         </Wrapper>
     );
 }
@@ -32,6 +34,11 @@ const Wrapper = styled.div`
         font-size: 32px;
         color: var(--color-gray-700);
         margin-bottom: 50px;
+    }
+
+    .container {
+        width: 130px;
+        margin: 0 auto;
     }
 `;
 
