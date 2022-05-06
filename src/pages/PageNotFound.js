@@ -10,6 +10,7 @@ function NotFound() {
         dispatch(globalActions.handleActiveMenuItem(name));
     };
 
+
     const navigate = useNavigate();
     const handleButtonClick = () => {
         handleActiveMenuItem("Shop");

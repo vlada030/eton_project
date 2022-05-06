@@ -18,6 +18,7 @@ import CartItem from './CartItem'
 import FilterItemsForm from './FilterItemsForm'
 import SortButton from './SortButton'
 import ScrollToTopButton from './ScrollToTopButton'
+import ModalMessage from './ModalMessage'
 
 export {
     Navigation,
@@ -39,5 +40,6 @@ export {
     CartItem,
     FilterItemsForm,
     SortButton,
-    ScrollToTopButton
+    ScrollToTopButton,
+    ModalMessage
 };

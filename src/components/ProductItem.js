@@ -3,12 +3,15 @@ import {useDispatch} from 'react-redux'
 import {Button} from '.'
 import {formatPrice} from '../utils/handleItemPrice'
 import { cartActions } from "../store/cart_slice";
+import { globalActions } from "../store/global_slice";
 
 function ProductItem(item) {
     const { image, title, price, description } = item;
     const dispatch = useDispatch()
     const addItemToCart = () => {
         dispatch(cartActions.addItemToCart(item))
+        dispatch(globalActions.handleIsModalMsgOpen(true))
+        dispatch(globalActions.handleModalMsgText('Added to cart!'))
     }
 
     return <Card>

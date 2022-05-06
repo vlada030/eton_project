@@ -8,7 +8,7 @@ import {
     Navigate,
 } from "react-router-dom";
 import { Shop, Cart, PageNotFound } from "./pages";
-import { Navigation, ScrollToTopButton } from "./components";
+import { Navigation, ScrollToTopButton, ModalMessage } from "./components";
 import { useDispatch } from "react-redux";
 import {getProductItems} from './store/products_slice'
 
@@ -22,6 +22,7 @@ function App() {
         // eslint-disable-next-line
     }, []);
 
+
     return (
         <Router>
             <Routes>
@@ -30,6 +31,7 @@ function App() {
                     element={
                         <Fragment>
                             <Navigation />
+                            <ModalMessage />
                             <Outlet />
                             <ScrollToTopButton />
                         </Fragment>

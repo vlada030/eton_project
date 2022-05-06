@@ -10,6 +10,7 @@ function SortButton() {
         dispatch(productsActions.handleSortingOrder())
     }
     
+
     return (
         <Wrapper onClick={() => handleSortingOrder()}>
             {ascendingSort ? <BsSortUpAlt /> : <BsSortUp />}

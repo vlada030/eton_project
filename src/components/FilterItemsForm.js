@@ -13,6 +13,7 @@ function FilterItemsForm() {
     const handleSearchInput = (term) => {
         dispatch(productsActions.handleSearchInput(term))
     }
+
     const searchField = useRef();
 
     useEffect(() => {
@@ -21,6 +22,7 @@ function FilterItemsForm() {
 
     const handleUserInput = (e) => {
         debounce(handleSearchInput(e.target.value));
+
     };
     return (
         <Wrapper>

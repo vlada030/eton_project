@@ -29,6 +29,7 @@ function Shop() {
     );
     const errorMessage = useSelector((state) => state.products.errorMessage);
 
+
     if (!areProductsLoaded && !doesErrorExist) {
         return (
             <ContentWrapper>
@@ -49,6 +50,7 @@ function Shop() {
             <FilterItemsForm />
 
             {noSearchResults && (
+
                 <h2 style={{ textAlign: "center" }}>
                     Sorry, your search criteria didn't give any results...
                 </h2>
@@ -70,6 +72,7 @@ function Shop() {
                     }
                 )}
             </Wrapper>
+
         </ContentWrapper>
     );
 }

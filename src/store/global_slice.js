@@ -7,6 +7,8 @@ const globalSlice = createSlice({
         isCartOpen: false,
         isLoading: false,
         activeMenuItem: "Shop",
+        isModalMsgOpen: false,
+        modalMsgText: ''
     },
     reducers: {
     handleStartLoading (state) {
@@ -28,6 +30,14 @@ const globalSlice = createSlice({
 
     handleActiveMenuItem (state, action) {
         state.activeMenuItem = action.payload
+    },
+
+    handleIsModalMsgOpen(state, action) {
+        state.isModalMsgOpen = action.payload
+    },
+
+    handleModalMsgText(state, action) {
+        state.modalMsgText = action.payload
     }
     },
 });
