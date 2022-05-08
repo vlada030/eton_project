@@ -7,6 +7,7 @@ import {
 } from "../components/.";
 import { ErrorPage } from "../pages/.";
 import { useSelector } from "react-redux";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function ShimmerList() {
     return [1, 2, 3, 4, 5, 6].map((item) => {
@@ -29,7 +30,6 @@ function Shop() {
     );
     const errorMessage = useSelector((state) => state.products.errorMessage);
 
-
     if (!areProductsLoaded && !doesErrorExist) {
         return (
             <ContentWrapper>
@@ -49,30 +49,47 @@ function Shop() {
         <ContentWrapper>
             <FilterItemsForm />
 
-            {noSearchResults && (
-
+            {/* {noSearchResults && (
                 <h2 style={{ textAlign: "center" }}>
                     Sorry, your search criteria didn't give any results...
                 </h2>
+            )} */}
+
+            {noSearchResults && (
+                <CSSTransition
+                    in={noSearchResults}
+                    classNames="fade"
+                    timeout={400}
+                >
+                    <h2 style={{ textAlign: "center" }}>
+                        Sorry, your search criteria didn't give any results...
+                    </h2>
+                </CSSTransition>
             )}
 
-            <Wrapper>
+            <TransitionGroup component={Wrapper}>
                 {filteredProducts.map(
                     ({ id, image, title, price, description }) => {
                         return (
-                            <ProductItem
+                            <CSSTransition
                                 key={id}
-                                id={id}
-                                image={image}
-                                title={title}
-                                price={price}
-                                description={description}
-                            />
+                                appear={true}
+                                timeout={400}
+                                classNames="fade"
+                            >
+                                <ProductItem
+                                    key={id}
+                                    id={id}
+                                    image={image}
+                                    title={title}
+                                    price={price}
+                                    description={description}
+                                />
+                            </CSSTransition>
                         );
                     }
                 )}
-            </Wrapper>
-
+            </TransitionGroup>
         </ContentWrapper>
     );
 }
