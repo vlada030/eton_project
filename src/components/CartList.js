@@ -4,6 +4,7 @@ import {formatPrice, sumTotalCartPrice} from '../utils/handleItemPrice'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import { cartActions } from '../store/cart_slice'
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
 function CartList() {
     const cart = useSelector(state => state.cart.cart)
@@ -22,13 +23,18 @@ function CartList() {
 
     return (
         <Wrapper>
-            {cart.map((item, index) => {
-                return (
-                    <li key={index}>
-                        <CartItem item={item}/>
-                    </li>
-                );
-            })}
+            <TransitionGroup component={null}>
+                {cart.map((item, index) => {
+                    return (
+                        <CSSTransition key={item.title} classNames="fade" timeout={400}>
+                            <li>
+                                <CartItem item={item} />
+                            </li>
+                        </CSSTransition>
+                    );
+                })}
+            </TransitionGroup>
+
             <div className="total-wrapper">
                 <h3 className="total-title">Total</h3>
                 <p className="total-price">{formatPrice(totalPrice)}$</p>

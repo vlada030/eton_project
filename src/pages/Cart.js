@@ -1,16 +1,23 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { CartList } from "../components/.";
+import { CSSTransition } from "react-transition-group";
 
 function Cart() {
     const cart = useSelector((state) => state.cart.cart);
+    const isCartEmpty = cart.length === 0;
 
     return (
         <Wrapper>
             <div className="container">
-                <h3 className="title">
-                    {cart.length === 0 ? "Your Cart is Empty" : "Your Cart"}
-                </h3>
+                <CSSTransition 
+                    in={isCartEmpty} 
+                    classNames="fade" 
+                    timeout={400}>
+                        <h3 className="title">
+                            {isCartEmpty ? "Your Cart is Empty" : "Your Cart"}
+                        </h3>
+                </CSSTransition>
                 {cart.length !== 0 && <CartList />}
             </div>
         </Wrapper>

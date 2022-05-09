@@ -48,7 +48,7 @@ body {
 }
 .fade-appear.fade-appear-active {
   opacity: 1;
-  transition: opacity 200ms linear;
+  transition: opacity 300ms linear;
 }
 
 /* enter */
@@ -66,8 +66,9 @@ body {
 }
 .fade-exit.fade-exit-active {
     opacity: 0;
-    transition: opacity 100ms linear;
+    transition: opacity 200ms linear;
 }
-.fade-exit-done {
+/* .fade-exit-done {
   opacity: 0;
-}
+} */
+

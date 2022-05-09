@@ -59,11 +59,12 @@ function Shop() {
                 <CSSTransition
                     in={noSearchResults}
                     classNames="fade"
-                    timeout={400}
+                    timeout={300}
                 >
                     <h2 style={{ textAlign: "center" }}>
                         Sorry, your search criteria didn't give any results...
                     </h2>
+                        
                 </CSSTransition>
             )}
 
@@ -78,7 +79,6 @@ function Shop() {
                                 classNames="fade"
                             >
                                 <ProductItem
-                                    key={id}
                                     id={id}
                                     image={image}
                                     title={title}
